@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 #-
 # Copyright (c) 2009-2015 Juan Romero Pardines.
@@ -28,7 +28,7 @@ umask 022
 
 . ./lib.sh
 
-readonly REQUIRED_PKGS="base-files libgcc dash coreutils sed tar gawk syslinux grub-i386-efi grub-x86_64-efi memtest86+ squashfs-tools xorriso"
+readonly REQUIRED_PKGS="base-files libgcc dash coreutils sed tar gawk grub-arm64-efi squashfs-tools xorriso"
 readonly INITRAMFS_PKGS="binutils xz device-mapper dhclient dracut-network openresolv"
 readonly PROGNAME=$(basename "$0")
 declare -a INCLUDE_DIRS=()
@@ -73,7 +73,7 @@ usage() {
 	to a CD/DVD-ROM or any USB stick.
 
 	To generate a more complete live ISO image, use build-x86-images.sh.
-	
+
 	OPTIONS
 	 -a <arch>          Set XBPS_ARCH in the ISO image
 	 -b <system-pkg>    Set an alternative base package (default: base-system)
@@ -357,7 +357,7 @@ ARCH=$(xbps-uhelper arch)
 : ${BOOT_TITLE:="Void Linux"}
 
 case $BASE_ARCH in
-    x86_64*|i686*) ;;
+    x86_64*|i686*|aarch64*) ;;
     *) >&2 echo architecture $BASE_ARCH not supported by mklive.sh; exit 1;;
 esac
 
